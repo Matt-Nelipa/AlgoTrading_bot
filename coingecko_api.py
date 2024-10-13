@@ -46,22 +46,22 @@ for i in range(len(data["prices"])):
 df = pd.DataFrame(formatted_data, columns=['timestamp', 'prices', 'market_caps', 'total_volumes'])
 
 # Выводим DataFrame
-#print(df)
+print(df.head())
 
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import root_mean_squared_error
-from sklearn.model_selection import train_test_split
+# from sklearn.linear_model import LinearRegression
+# from sklearn.metrics import root_mean_squared_error
+# from sklearn.model_selection import train_test_split
 
-X = df[["market_caps", "total_volumes"]]
-y = df["prices"]
+# X = df[["market_caps", "total_volumes"]]
+# y = df["prices"]
 
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-model = LinearRegression()
-model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
-res = root_mean_squared_error(y_test, y_pred)
-print(res)
-print(y_pred[:5])
-print(y_test[:5])
+# model = LinearRegression()
+# model.fit(X_train, y_train)
+# y_pred = model.predict(X_test)
+# res = root_mean_squared_error(y_test, y_pred)
+# print(res)
+# print(y_pred[:5])
+# print(y_test[:5])
