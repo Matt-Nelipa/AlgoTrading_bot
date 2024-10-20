@@ -1,4 +1,4 @@
 api_key_sec.py
 catboost_info/
-load_key.sh
 __pycache__/
+.env
