@@ -1,4 +1,11 @@
+decrypted_file
 api_key_sec.py
 catboost_info/
 __pycache__/
 .env
+load_key.sh
+id_ed25519
+id_ed25519.pub
+coingecko_api_setup.ipynb.orig
+btc_data.csv
+.ipynb_checkpoints/
