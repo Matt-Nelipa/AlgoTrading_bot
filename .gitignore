@@ -7,5 +7,6 @@ load_key.sh
 id_ed25519
 id_ed25519.pub
 coingecko_api_setup.ipynb.orig
+api_keys.py
 btc_data.csv
 .ipynb_checkpoints/
