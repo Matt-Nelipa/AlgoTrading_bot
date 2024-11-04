@@ -10,3 +10,5 @@ coingecko_api_setup.ipynb.orig
 api_keys.py
 btc_data.csv
 .ipynb_checkpoints/
+bitcoin_data_5min_clean.csv
+btc_data_1min.csv
