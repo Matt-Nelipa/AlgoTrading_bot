@@ -1,3 +1,12 @@
+from tenacity import retry, stop_after_attempt, wait_fixed
+import numpy as np
+import pandas as pd
+import inspect
+import warnings
+import tti.indicators as ti
+from datetime import datetime
+import time
+
 @retry(stop=stop_after_attempt(5), wait=wait_fixed(10))
 def get_wallet_balance_with_retry(session, accountType='UNIFIED', coin='BTC'):
     return session.get_wallet_balance(accountType=accountType, coin=coin)
@@ -22,7 +31,7 @@ def generate_indicators(df):
     
     return combined_df
 
-def get_clean_ohlcv_data(symbol="BTCUSDT", interval=5):
+def get_clean_ohlcv_data(symbol="BTCUSDT", interval=5, session=session):
     
     ''' extracts OHLCV data from Bybit for the last 5 minutes'''
     
@@ -61,12 +70,12 @@ def get_clean_ohlcv_data(symbol="BTCUSDT", interval=5):
     except Exception as e:
         print("Error extracting data:", e)
 
-def input_data_preprocessing():
+def input_data_preprocessing(btc_data=btc_data_copy_v1):
     
     ''' combines previous OHLCV data with the newest one and processes it'''
     
     new_ohlcv_row = get_clean_ohlcv_data()
-    last_55_rows_df = btc_data_copy_v1.iloc[-300:, :5]
+    last_55_rows_df = btc_data.iloc[-300:, :5]
     ohlcv_data = pd.concat([last_55_rows_df, new_ohlcv_row], axis=0)
     featured_data = generate_indicators(ohlcv_data)
     featured_data = featured_data.drop(['adl', 'cmf', 'emv_ma', 'emv', 'mfi', 'vrc', 'target_label'], axis=1)
@@ -78,20 +87,20 @@ def input_data_preprocessing():
     featured_data = featured_data.drop('dpo', axis=1)
     return featured_data.iloc[[-1]]
 
-def get_bitcoin_signal():
+def get_bitcoin_signal(model=tuned_model):
     
     '''ohlcv_data processing, features generation, 
     PCA application and model prediction'''
     
     preprocessed_data = input_data_preprocessing()
-    y_pred = tuned_model.predict(preprocessed_data)
+    y_pred = model.predict(preprocessed_data)
     last_btc_price = preprocessed_data['close'].iloc[-1]
     last_date = preprocessed_data.index[-1]
     # FIXME продумать логику добавления новых данных в исходные датасеты (зазписать в .csv)
     return (y_pred, last_btc_price, last_date)
 
 
-def place_order(order_side: str, amount): #FIXME
+def place_order(order_side: str, amount, session=session): #FIXME
     
     '''makes a "buy" or "sell" order'''
     
@@ -111,7 +120,7 @@ def place_order(order_side: str, amount): #FIXME
     except Exception as e:
         print("Error making an order:", e)
 
-def trading_bot(threshold=0.7, amount=1000):
+def trading_bot(threshold=0.7, amount=1000, date_list=date_list, probability_list=probability_list, price_list=price_list, session=session):
     while True:
         probability, last_btc_price, last_date = get_bitcoin_signal()
         date_list.append(last_date)
