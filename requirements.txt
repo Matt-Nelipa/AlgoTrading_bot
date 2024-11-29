@@ -16,7 +16,6 @@ attrs==24.2.0
 babel==2.16.0
 beautifulsoup4==4.12.3
 bleach==6.1.0
-catboost==1.2.7
 ccxt==4.4.25
 certifi==2024.8.30
 cffi==1.17.1
@@ -72,7 +71,6 @@ jupyterlab==4.2.5
 jupyterlab_pygments==0.3.0
 jupyterlab_server==2.27.3
 jupyterlab_widgets==3.0.13
-keras==3.6.0
 kiwisolver==1.4.7
 libclang==18.1.1
 lightgbm==4.5.0
@@ -148,7 +146,6 @@ statsmodels==0.14.4
 tenacity==9.0.0
 tensorboard==2.17.1
 tensorboard-data-server==0.7.2
-tensorflow==2.17.0
 termcolor==2.5.0
 terminado==0.18.1
 threadpoolctl==3.5.0
@@ -170,5 +167,4 @@ Werkzeug==3.0.4
 wheel==0.44.0
 widgetsnbextension==4.0.13
 wrapt==1.16.0
-xgboost==2.1.1
 yarl==1.17.1
