@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     warnings.filterwarnings('ignore')
 
-    initial_btc_data = pd.read_csv('...') # raw btc data from Kaggle
+    initial_btc_data = pd.read_csv('btc_data.csv')
     btc_data_copy_features, btc_data_copy_targets = preprocess_data(initial_btc_data)
     params = tune_parameters()
     dtrain = lgb.Dataset(btc_data_copy_features, label=btc_data_copy_targets, feature_name=list(btc_data_copy_features.columns))
