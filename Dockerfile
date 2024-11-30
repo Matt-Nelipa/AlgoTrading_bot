@@ -6,6 +6,7 @@ COPY main.py /app/
 COPY preprocessing.py /app/
 COPY bayesian_optimization.py /app/
 COPY bot_initialize.py /app/
+COPY api_keys.py /app/
 COPY requirements.txt /app/
 COPY btc_data.csv /app/
 
