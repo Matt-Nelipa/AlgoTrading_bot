@@ -15,3 +15,4 @@ btc_data_1min.csv
 bitcoin_data_5min.csv
 dirty_5min.csv
 clean_5min.csv
+my_env/
